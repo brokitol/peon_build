@@ -68,7 +68,6 @@ type de requette :
 	soin : deplacement
 	construction: deplacement
 
-
 gestion en memoire :
 	memory.requette.type.priorite.nom.info
 
@@ -80,3 +79,33 @@ scénario :
 	un peon blessé : soin
 	un batiment qui a besoin de réparation : soin
 	un batiment qui a besoin d'être construit : construction
+
+	récolteur
+		creer
+		soin
+		ressource | donner
+	transporteur
+		creer
+		soin
+			ressource | prendre
+			ressource | donner
+	batisseur
+		creer
+		soin
+		ressource | prendre
+			construction
+			soin | batiment
+	soldat
+		creer
+		soin
+			future gestion tactique par requette ?
+	soigneur
+		creer
+		soin
+		ressource | prendre
+			soin | peon
+	batiment
+		construction
+		soin
+		ressource | prendre
+			creer
