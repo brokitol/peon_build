@@ -1,0 +1,82 @@
+chaque requette a un proprio qui doit s'en occupé
+une requette a
+	- un proprio
+	- un besoin (energie, soin, etc...)
+	- un lieu de rdv (x,y)
+	- un fourniseur
+	- une priorité
+
+vie d'une requette :
+	- lancement par le proprio
+	- un fourniseur la prend en charge
+	- le fourniseur ne peut subvenir a la requette et annule sa prise en charge.
+	- le proprio n'a plus besoin de la requette et l'annule
+	- la requette est validé. Elle disparait
+
+gestion divine
+	- gestion par type de peon
+	- lancement de la gestion des peons même s'il n'existe pas
+	- avantage
+		- pas de problème de morts subite
+		- ordre de gestion des peons stable voir fixe
+	- inconvegnant
+		- surconsomation de CPU a chaque tour
+		- ne gère pas les peons qui ne sont pas dans les fichiers de config
+		- récriture total des classes de gestion de peon (pas un mal en sois, juste long)
+
+charger les types de peon
+	certain type sont en rapports avec un objet (source, exit, etc...)
+	certain type sont en rapport a une room (constructeur, etc...)
+	certain type sont en rapport au nombre d'autre peon existant (transporteur, medecin, etc...)
+
+définition d'un type :
+	- le modele (qui pourra être modulaire au final (récolteur...))
+	- définition du point de comparaison pour le ratio
+	- ratio (exemple : 3 peon par source)
+
+class peon extand creeps
+	attributs
+		plan de construction
+		nom
+	methode
+		creer
+		faire_requette
+		repondre_requette
+
+type de requette :
+	creer : qui, priorite, modele, 1 fourniseur
+	ressource : qui, priorite, quantiter, prendre/donner, plusieurs fourniseur, ou, deplacement du demandeur possible ?
+	soin : qui, priorite, quantiter a soigner, plusieurs fourniseur, ou, deplacement du demandeur possible ?
+	construction, qui, priorite, quantitier de matos, plusieurs fourniseur, ou
+
+squelette de requette :
+	qui	-> type (structure / peon), nom
+	priorite -> 0 = dieu le veux, infinie -> osef
+	detail -> quantiter de ressource/soin et donc si le fournisseur peut suffir seul ou si d'autre doit venir aussi
+	ou -> lieu du rencontre # sert sois pour l'optimisation, sois pour que le demandeur puisse avancer a sa prochaine mission. (un constructeur avec encore de l'energie en reserve par exemple)
+
+spécial :
+	deplacement # indique si le demandeur souhaite se deplacer pour obtenir plus rapidement se qu'il demande (typiquement un peon qui ne peut pas travailler sans sa requette ou qui n'a pas de travail)
+	prendre/donner # indique si le demandeur a besoin de prendre ou donner de l'energie
+	pour les creations, le detail contient le modele du peon
+
+type de requette :
+	creer : detail = modele
+			1 fourniseur max (gestion au niveau des spawns)
+		deplacement
+	ressource : prendre/donner, deplacement
+	soin : deplacement
+	construction: deplacement
+
+
+gestion en memoire :
+	memory.requette.type.priorite.nom.info
+
+scénario :
+	un peon qui est mort : creer
+	un recolteur qui a déjà acumulé des ressources : ressource
+	un spawn qui a besoin de ressource pour creer : ressource
+	un medecin qui a besoin de ressource : ressource
+	un peon blessé : soin
+	un batiment qui a besoin de réparation : soin
+	un batiment qui a besoin d'être construit : construction

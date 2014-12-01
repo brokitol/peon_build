@@ -1,0 +1,35 @@
+role :
+	récolteur
+		reste sur le point de récolte, optimise le temps de récolte
+	transporteur
+		transporte les ressources des récolteurs au point qui en on besoin
+			spawn
+			batisseur
+			soigneur
+	batisseur
+		batisse et entretienne les batiments
+	soldat
+		combatent
+	soigneur
+		soigne ceux qui en on besoin
+
+algo général
+	créer les péons en fonction des besoins et des ratios
+	lier les péons entre eux en fonction des taches
+		pour chaque point qui réclame de l'énergie, affecter un transporteur
+		affecter les transporteur avec de l'energie et sans tache au point de stocage le plus proche (spawn)
+	envoyer les soldats au combats sinon sur une position utile
+	simplifier le travails des soigneurs en limitant le mouvement de leur cible
+	géré les problèmes de mouvement des péons (notament l'entretient des murs avec une hordes de soldat)
+
+fonctionnement par requette.
+memory.requette.energie.prio.id_demandeur	.combien
+						.quoi
+						.ou	.x
+							.y
+						.qui.type
+							.name
+
+truc prio a faire :
+	- assigner des sources au récolteur
+	- que la création des récolteur dépendent des sources libre
