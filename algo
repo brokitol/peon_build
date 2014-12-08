@@ -23,13 +23,6 @@ algo général
 	géré les problèmes de mouvement des péons (notament l'entretient des murs avec une hordes de soldat)
 
 fonctionnement par requette.
-memory.requette.energie.prio.id_demandeur	.combien
-																					.quoi
-																					.ou	.x
-																							.y
-																					.qui.type
-																							.name
-
 
 truc prio a faire :
 	- assigner des sources au récolteur

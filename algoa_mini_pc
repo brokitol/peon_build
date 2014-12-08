@@ -77,7 +77,7 @@ scénario :
 	un spawn qui a besoin de ressource pour creer : ressource
 	un medecin qui a besoin de ressource : ressource
 	un peon blessé : soin
-	un batiment qui a besoin de réparation : soin
+	un batiment qui a besoin de réparation : reparation
 	un batiment qui a besoin d'être construit : construction
 
 	récolteur
@@ -94,7 +94,7 @@ scénario :
 		soin
 		ressource | prendre
 			construction
-			soin | batiment
+			reparation
 	soldat
 		creer
 		soin
@@ -106,6 +106,6 @@ scénario :
 			soin | peon
 	batiment
 		construction
-		soin
+		reparation
 		ressource | prendre
 			creer
