@@ -16,7 +16,7 @@ class Peon
 
 	requette_ressource: (priorité, quantité, ou, prendre_donner) ->
 		creer_requete("ressource", priorité, quantité, ou)
-		memory.requete["ressource"][priorité][@name]["prendre_donner"] = prendre_donner
+		Memory.requete["ressource"][priorité][@name]["prendre_donner"] = prendre_donner
 
 	creer_requete: (besoin, priorité, detail, ou) ->
 		if Memory.requete[besoin] == undefined
@@ -24,10 +24,23 @@ class Peon
 		if Memory.requete[besoin][priorité] == undefined
 			Memory.requete[besoin][priorité] = {}
 
-		memory.requete[besoin][priorité][@name] = {}
-		memory.requete[besoin][priorité][@name]["detail"] = detail
-		memory.requete[besoin][priorité][@name]["ou"] = ou
+		Memory.requete[besoin][priorité][@name] = {}
+		Memory.requete[besoin][priorité][@name]["detail"] = detail
+		Memory.requete[besoin][priorité][@name]["ou"] = ou
 
-		creer
-		faire_requette
-		repondre_requette
+	repondre_requete: (besoin, priorité, name, detail) ->
+		if Memory.requete[besoin] == undefined
+			return false
+		if Memory.requete[besoin][priorité] == undefined
+			return false
+		if Memory.requete[besoin][priorité][name] == undefined
+			return false
+
+		if Memory.requete[besoin][priorité][name]["hero"] == undefined
+			Memory.requete[besoin][priorité][name]["hero"] == {}
+
+		Memory.requete[besoin][priorité][name]["hero"][@name] == detail
+		return true
+
+	repondre_requette_ressource: (priorité, name, quantité) ->
+		repondre_requete("ressource", priorité, name, quantité)
